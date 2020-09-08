@@ -24,7 +24,10 @@ stages:
         command: 'test'
         projects: 'src/PocRandD.Test/PocRandD.Test.csproj'
       displayName: 'Unit_Tests'
-    - script: echo Static_Analysis
+    - script: sudo dotnet tool install --tool-path=/usr/bin dotnet-sonarscanner --version 4.10.0
+    - script: sudo dotnet sonarscanner begin /o:gerardoat /k:gerardoat_integracionpipelines /d:sonar.host.url=https://sonarcloud.io /version:$(Build.BuildNumber)
+    - script: sudo dotnet build src --configuration Release
+    - script: sudo SONAR_TOKEN=aff7a6afb8e4861ffd38a5ad975672f58598658a dotnet sonarscanner end
       displayName: 'Static_Analysis'
     - script: echo Publish_Dev
       displayName: 'Publish_Dev'
