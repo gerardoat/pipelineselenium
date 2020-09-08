@@ -19,7 +19,10 @@ stages:
     steps:
     - script: dotnet build src --configuration $(buildConfiguration)
       displayName: 'Build'
-    - script: echo Unit_Tests
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: 'src/PocRandD.Test/PocRandD.Test.csproj'
       displayName: 'Unit_Tests'
     - script: echo Static_Analysis
       displayName: 'Static_Analysis'
