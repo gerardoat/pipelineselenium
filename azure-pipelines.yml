@@ -1,0 +1,47 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+- stage: Development
+  jobs:
+  - job: Development
+    steps:
+    - script: dotnet build src --configuration $(buildConfiguration)
+      displayName: 'Build'
+    - script: echo Unit_Tests
+      displayName: 'Unit_Tests'
+    - script: echo Static_Analysis
+      displayName: 'Static_Analysis'
+    - script: echo Publish_Dev
+      displayName: 'Publish_Dev'
+    - script: echo Functional_Tests
+      displayName: 'Functional_Tests'
+    - script: echo Performance_Tests
+      displayName: 'Performance_Tests'
+    - script: echo Delete_Dev_Publish
+      displayName: 'Delete_Dev_Publish'
+
+- stage: QA
+  jobs:
+  - job: QA
+    steps:
+    - script: echo Publish_QA
+      displayName: 'Publish_QA'
+  
+- stage: UAT
+  jobs:
+  - job: QA
+    steps:
+    - script: echo Publish_UAT
+      displayName: 'Publish_UAT'
