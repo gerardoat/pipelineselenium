@@ -21,7 +21,5 @@ steps:
     azureSubscription: 'Azure-Trial-Maru'
     appType: 'webAppLinux'
     WebAppName: 'pruebaspipelines'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/src/**/*.zip'
     RuntimeStack: 'DOTNETCORE|3.1'
-- script: find . *.zip
-  displayName: 'Buscarzips'
