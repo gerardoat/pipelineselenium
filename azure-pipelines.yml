@@ -23,3 +23,5 @@ steps:
     WebAppName: 'pruebaspipelines'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
     RuntimeStack: 'DOTNETCORE|3.1'
+- script: find . *.zip
+  displayName: 'Buscarzips'
