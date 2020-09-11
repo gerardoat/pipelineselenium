@@ -15,11 +15,13 @@ variables:
 steps:
 - script: dotnet build src --configuration $(buildConfiguration)
   displayName: 'Build'
-- task: AzureRmWebAppDeployment@4
+- task: DotNetCoreCLI@2
+  displayName: 'Create the Publish'
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure-Trial-Maru'
-    appType: 'webAppLinux'
-    WebAppName: 'pruebaspipelines'
-    packageForLinux: '/**/*.zip'
-    RuntimeStack: 'DOTNETCORE|3.1'
+    command: publish
+    publishWebProjects: false
+    projects: 'src/PocRandD/PocRandD.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifacts'
