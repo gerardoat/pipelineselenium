@@ -25,3 +25,12 @@ steps:
     zipAfterPublish: true
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifacts'
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy to Azure AppService'
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'SuscripcionMaru'
+    appType: 'webAppLinux'
+    WebAppName: 'pocpipelines'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'DOTNETCORE|3.1'
