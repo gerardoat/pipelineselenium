@@ -32,5 +32,5 @@ steps:
     azureSubscription: 'SuscripcionMaru'
     appType: 'webAppLinux'
     WebAppName: 'pocpipelines'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     RuntimeStack: 'DOTNETCORE|3.1'
