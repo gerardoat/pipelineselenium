@@ -19,4 +19,4 @@ steps:
   inputs:
     command: 'test'
     workingDirectory: 'src/PocRandD.Test/PocRandD.Test.csproj'
-displayName:'Pruebas funcionales'
+  displayName: 'Pruebas funcionales'
