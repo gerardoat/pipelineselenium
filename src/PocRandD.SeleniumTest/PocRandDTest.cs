@@ -44,6 +44,42 @@ namespace PocRandD.SeleniumTest
             driver.FindElement(By.LinkText("Privacy")).Click();
             driver.FindElement(By.LinkText("PocRandD")).Click();
         }
+        [Test]
+        public void Test2()
+        {
+            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
+            driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
+            driver.FindElement(By.LinkText("Privacy")).Click();
+            driver.FindElement(By.CssSelector("h1")).Click();
+            driver.FindElement(By.LinkText("Home")).Click();
+            driver.FindElement(By.CssSelector("h2")).Click();
+            driver.FindElement(By.LinkText("Privacy")).Click();
+            driver.FindElement(By.LinkText("PocRandD")).Click();
+        }
+        [Test]
+        public void Test3()
+        {
+            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
+            driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
+            driver.FindElement(By.LinkText("Privacy")).Click();
+            driver.FindElement(By.CssSelector("h1")).Click();
+            driver.FindElement(By.LinkText("Home")).Click();
+            driver.FindElement(By.CssSelector("h2")).Click();
+            driver.FindElement(By.LinkText("Privacy")).Click();
+            driver.FindElement(By.LinkText("PocRandD")).Click();
+        }
+        [Test]
+        public void Test4()
+        {
+            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
+            driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
+            driver.FindElement(By.LinkText("Privacy")).Click();
+            driver.FindElement(By.CssSelector("h1")).Click();
+            driver.FindElement(By.LinkText("Home")).Click();
+            driver.FindElement(By.CssSelector("h2")).Click();
+            driver.FindElement(By.LinkText("Privacy")).Click();
+            driver.FindElement(By.LinkText("PocRandD")).Click();
+        }
     }
 
 }
