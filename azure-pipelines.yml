@@ -16,7 +16,26 @@ steps:
 - script: dotnet build src --configuration $(buildConfiguration)
   displayName: 'Build'
 - task: DotNetCoreCLI@2
+  displayName: 'Create the Publish'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: 'src/PocRandD/PocRandD.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+- task: DotNetCoreCLI@2
   inputs:
     command: 'test'
     projects: 'src/PocRandD.Test/PocRandD.Test.csproj'
   displayName: 'Pruebas funcionales'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifacts'
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy to Azure AppService'
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'SuscripcionMaru'
+    appType: 'webAppLinux'
+    WebAppName: 'pocpipelines'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+    RuntimeStack: 'DOTNETCORE|3.1'
