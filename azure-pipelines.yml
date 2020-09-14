@@ -15,12 +15,8 @@ variables:
 steps:
 - script: dotnet build src --configuration $(buildConfiguration)
   displayName: 'Build'
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    testRunTitle: 'Pruebas funcionales'
+    command: 'test'
+    workingDirectory: 'src/PocRandD.Test/PocRandD.Test.csproj'
+displayName:'Pruebas funcionales'
