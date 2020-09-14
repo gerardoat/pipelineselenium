@@ -18,5 +18,5 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    workingDirectory: 'src/PocRandD.Test/PocRandD.Test.csproj'
+    projects: 'src/PocRandD.Test/PocRandD.Test.csproj'
   displayName: 'Pruebas funcionales'
