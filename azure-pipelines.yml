@@ -32,7 +32,7 @@ steps:
     command: custom
     projects: '**/PocRandD.SeleniumTest.dll'
     custom: vstest
-    arguments: '--logger:trxlogfilename=TEST.xml'
+    arguments: '--logger:trx;logfilename=TEST.xml'
 - task: PublishTestResults@2
   displayName: 'Publish Test Results '
   inputs:
