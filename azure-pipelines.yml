@@ -36,6 +36,6 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'SuscripcionMaru'
     appType: 'webAppLinux'
-    WebAppName: 'pocpipelines'
+    WebAppName: 'pocselenium'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     RuntimeStack: 'DOTNETCORE|3.1'
