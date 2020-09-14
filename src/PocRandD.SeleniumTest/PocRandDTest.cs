@@ -35,7 +35,7 @@ namespace PocRandD.SeleniumTest
         [Test]
         public void pocRandD()
         {
-            driver.Navigate().GoToUrl("https://localhost:44352/");
+            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
             driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
             driver.FindElement(By.LinkText("Privacy")).Click();
             driver.FindElement(By.CssSelector("h1")).Click();
