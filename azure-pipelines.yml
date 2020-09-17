@@ -20,7 +20,7 @@ stages:
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: 'Free Trial(d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90)'
+        azureResourceManagerConnection: 'SuscripcionMaru(d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90)'
         subscriptionId: 'd6c2c6fa-eaa9-4d22-bd11-da6eacb13f90'
         action: 'Create Or Update Resource Group'
         resourceGroupName: $(resourceGroup)
