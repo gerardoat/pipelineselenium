@@ -1,24 +1,17 @@
-
-
-# ASP.NET Core.
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - master
 
-pool:
-  vmImage: 'windows-2019'
-
 variables:
   buildConfiguration: 'Release'
+  buildId: $(Build.SourceVersion)
+  resourcesId: $(buildId)
 
-steps:
-- script: dotnet build src --configuration $(buildConfiguration)
-  displayName: 'Build'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: 'src/PocRandD.SeleniumTest/PocRandD.SeleniumTest.csproj'
-  displayName: 'Pruebas funcionales'
+stages:
+- stage: Development
+  jobs:
+  - job: Build_UnitTests_Analysis_And_Deploy
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo $(resourcesId)
+      displayName: 'POC'
