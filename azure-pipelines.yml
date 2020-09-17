@@ -17,3 +17,15 @@ stages:
     steps:
     - script: echo $(resourceGroup)
     - script: echo $(appService)
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'Free Trial(d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90)'
+        subscriptionId: 'd6c2c6fa-eaa9-4d22-bd11-da6eacb13f90'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: $(resourceGroup)
+        location: 'South Central US'
+        templateLocation: 'Linked artifact'
+        csmFile: 'infra/Templates/Web App/template.json'
+        csmParametersFile: 'infra/Templates/Web App/parameters.json'
+        deploymentMode: 'Incremental'
