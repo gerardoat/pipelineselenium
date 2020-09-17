@@ -16,11 +16,22 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - script: echo $(resourceGroup)
-    - script: echo $(appService)
     - task: AzureCLI@2
       inputs:
         azureSubscription: 'Free Trial(d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: 'az group create --name $(resourceGroup) --location $(region)'
+      displayName: 'Create Resource Group'
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'Free Trial(d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90)'
+        subscriptionId: 'd6c2c6fa-eaa9-4d22-bd11-da6eacb13f90'
+        action: 'Create Or Update Resource Group'
+        templateLocation: 'Linked artifact'
+        csmFile: 'infra/Templates/Web App/SvcPlan-template.json'
+        csmParametersFile: 'infra/Templates/Web App/SvcPlan-parameters.json'
+        overrideParameters: '-serverFarmResourceGroup $(resourceGroup)'
+        deploymentMode: 'Incremental'
+      displayName: 'Create App Service Plan'

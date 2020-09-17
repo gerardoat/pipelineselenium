@@ -6,16 +6,16 @@
             "value": "d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90"
         },
         "name": {
-            "value": "randdapp"
+            "value": "AppSrvcPOC"
         },
         "location": {
             "value": "South Central US"
         },
         "hostingPlanName": {
-            "value": "asp-pocrandd-2"
+            "value": "SPPocPrueba"
         },
         "serverFarmResourceGroup": {
-            "value": "PruebasPipelinesRG"
+            "value": "RG-res-20200917.28"
         },
         "alwaysOn": {
             "value": false
