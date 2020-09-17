@@ -4,7 +4,7 @@ trigger:
 variables:
   buildConfiguration: 'Release'
   buildId: $(Build.SourceVersion)
-  resourcesId: $(buildId)
+  resourcesId: res$(buildId)
 
 stages:
 - stage: Development
