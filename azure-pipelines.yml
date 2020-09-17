@@ -4,7 +4,9 @@ trigger:
 variables:
   buildConfiguration: 'Release'
   buildId: $(Build.BuildNumber)
-  resourcesId: rs$(buildId)
+  resourcesId: res$(buildId)
+  resourceGroup: RG$(resourcesId)
+  appService: AppSvc$(resourcesId)
 
 stages:
 - stage: Development
@@ -13,5 +15,5 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - script: echo $(resourcesId)
-      displayName: 'POC'
+    - script: echo $(resourceGroup)
+    - script: echo $(appService)
