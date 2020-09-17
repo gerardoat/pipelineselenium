@@ -3,6 +3,7 @@ trigger:
 
 variables:
   buildConfiguration: 'Release'
+  region: 'southcentralus'
   buildId: $(Build.BuildNumber)
   resourcesId: res$(buildId)
   resourceGroup: RG$(resourcesId)
@@ -22,4 +23,4 @@ stages:
         azureSubscription: 'Free Trial(d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az group list --output table'
+        inlineScript: 'az group create --name $(resourceGroup) --location $(region)'
