@@ -5,9 +5,9 @@ variables:
   buildConfiguration: 'Release'
   region: 'southcentralus'
   buildId: $(Build.BuildNumber)
-  resourcesId: res$(buildId)
-  resourceGroup: RG$(resourcesId)
-  appService: AppSvc$(resourcesId)
+  resourcesId: res-$(buildId)
+  resourceGroup: RG-$(resourcesId)
+  appService: AppSvc-$(resourcesId)
 
 stages:
 - stage: Development
