@@ -30,6 +30,7 @@ stages:
         subscriptionId: 'd6c2c6fa-eaa9-4d22-bd11-da6eacb13f90'
         action: 'Create Or Update Resource Group'
         templateLocation: 'Linked artifact'
+        resourceGroupName: $(resourceGroup)
         csmFile: 'infra/Templates/Web App/SvcPlan-template.json'
         csmParametersFile: 'infra/Templates/Web App/SvcPlan-parameters.json'
         overrideParameters: '-serverFarmResourceGroup $(resourceGroup)'
