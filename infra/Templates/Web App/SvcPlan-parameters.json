@@ -6,16 +6,16 @@
             "value": "d6c2c6fa-eaa9-4d22-bd11-da6eacb13f90"
         },
         "name": {
-            "value": "AppSrvcPOC"
+            "value": null
         },
         "location": {
             "value": "South Central US"
         },
         "hostingPlanName": {
-            "value": "SPPocPrueba"
+            "value": null
         },
         "serverFarmResourceGroup": {
-            "value": "Temp"
+            "value": null
         },
         "alwaysOn": {
             "value": false
