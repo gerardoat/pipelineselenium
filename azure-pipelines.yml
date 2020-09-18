@@ -9,7 +9,8 @@ variables:
   resourcesId: res-$(buildId)
   resourceGroup: RG-$(resourcesId)
   appServicePlan: SvcPlan-$(resourcesId)
-  UriAppPocRandD: https://$[replace(variables['Build.BuildNumber'],'.','-')].azurewebsites.net
+  UriAppPocRandD2: https://$[replace(variables['Build.BuildNumber'],'.','-')].azurewebsites.net
+  UriAppPocRandD: $[format('https://{0}.azurewebsites.net', replace(variables['Build.BuildNumber'],'.','-'))]
 
 stages:
 - stage: Development
@@ -45,6 +46,7 @@ stages:
     steps:
     - script: dotnet build src --configuration $(buildConfiguration)
       displayName: 'Build Tests Project'
+    - script: setear la variable UriAppPocRandD
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
