@@ -9,7 +9,7 @@ variables:
   resourcesId: res-$(buildId)
   resourceGroup: RG-$(resourcesId)
   appServicePlan: SvcPlan-$(resourcesId)
-  appService: AppSvc-$(appServicePlan)
+  UriAppPocRandD: https://$[replace(variables['Build.BuildNumber'],'.','-')].azurewebsites.net
 
 stages:
 - stage: Development
@@ -39,3 +39,16 @@ stages:
         overrideParameters: '-serverFarmResourceGroup $(resourceGroup) -hostingPlanName $(appServicePlan) -name AppSvs-$(buildIdHyphen)'
         deploymentMode: 'Incremental'
       displayName: 'Create App Service Plan'
+  - job: SeleniumTests
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+    - script: dotnet build src --configuration $(buildConfiguration)
+      displayName: 'Build Tests Project'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: 'src/PocRandD.SeleniumTest/PocRandD.SeleniumTest.csproj'
+      displayName: 'FunctionalTests'
+    dependsOn: Build_UnitTests_Analysis_And_Deploy
+    condition: succeeded()

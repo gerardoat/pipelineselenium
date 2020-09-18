@@ -20,9 +20,14 @@ namespace PocRandD.SeleniumTest
         private IWebDriver driver;
         public IDictionary<string, object> vars { get; private set; }
         private IJavaScriptExecutor js;
+        private string Uri;
         [SetUp]
         public void SetUp()
         {
+            Console.WriteLine($"Inicializando variables de prueba...");
+            Uri = Environment.GetEnvironmentVariable("UriAppPocRandD");
+            Console.WriteLine($"URI: {Uri}");
+            
             driver = new ChromeDriver();
             js = (IJavaScriptExecutor)driver;
             vars = new Dictionary<string, object>();
@@ -35,7 +40,7 @@ namespace PocRandD.SeleniumTest
         [Test]
         public void pocRandD()
         {
-            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
+            driver.Navigate().GoToUrl(Uri);
             driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
             driver.FindElement(By.LinkText("Privacy")).Click();
             driver.FindElement(By.CssSelector("h1")).Click();
@@ -47,7 +52,7 @@ namespace PocRandD.SeleniumTest
         [Test]
         public void Test2()
         {
-            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
+            driver.Navigate().GoToUrl(Uri);
             driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
             driver.FindElement(By.LinkText("Privacy")).Click();
             driver.FindElement(By.CssSelector("h1")).Click();
@@ -59,7 +64,7 @@ namespace PocRandD.SeleniumTest
         [Test]
         public void Test3()
         {
-            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
+            driver.Navigate().GoToUrl(Uri);
             driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
             driver.FindElement(By.LinkText("Privacy")).Click();
             driver.FindElement(By.CssSelector("h1")).Click();
@@ -71,7 +76,7 @@ namespace PocRandD.SeleniumTest
         [Test]
         public void Test4()
         {
-            driver.Navigate().GoToUrl("https://pocselenium.azurewebsites.net/");
+            driver.Navigate().GoToUrl(Uri);
             driver.Manage().Window.Size = new System.Drawing.Size(697, 728);
             driver.FindElement(By.LinkText("Privacy")).Click();
             driver.FindElement(By.CssSelector("h1")).Click();
