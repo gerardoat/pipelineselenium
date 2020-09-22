@@ -45,7 +45,7 @@ stages:
       inputs:
         targetType: filePath
         filePath: 'infra/waitForApp.sh'
-        arguments: 'https://$(host)'
+        arguments: '$(UriAppPocRandD)'
         workingDirectory: infra
         failOnStderr: false
     - task: DotNetCoreCLI@2
@@ -73,7 +73,7 @@ stages:
       inputs:
         targetType: filePath
         filePath: 'infra/waitForApp.sh'
-        arguments: 'https://$(host)'
+        arguments: '$(UriAppPocRandD)'
         workingDirectory: infra
         failOnStderr: false
   - job: SeleniumTests
@@ -82,7 +82,6 @@ stages:
     steps:
     - script: dotnet build src --configuration $(buildConfiguration)
       displayName: 'Build Tests Project'
-    - script: setear la variable UriAppPocRandD
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
