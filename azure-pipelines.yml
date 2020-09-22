@@ -6,12 +6,13 @@ variables:
   region: 'southcentralus'
   buildId: $(Build.BuildNumber)
   buildIdHyphen: $[replace(variables['Build.BuildNumber'],'.','-')]
-  resourcesId: res-$(buildId)
+  resourcesId: $(buildId)
   resourceGroup: RG-$(resourcesId)
   appServicePlan: SvcPlan-$(resourcesId)
   UriAppPocRandD: $[format('https://appsvs-{0}.azurewebsites.net', replace(variables['Build.BuildNumber'],'.','-'))]
   webAppName: $[format('appsvs-{0}', replace(variables['Build.BuildNumber'],'.','-'))]
-
+  hostJMeter: $[format('appsvs-{0}.azurewebsites.net', replace(variables['Build.BuildNumber'],'.','-'))]
+  
 stages:
 - stage: Development
   jobs:
@@ -101,6 +102,6 @@ stages:
         inputs:
           targetType: filePath
           filePath: 'jmeter/test.sh'
-          arguments: '$PWD jmeterpocrandd.jmx $(host) $(buildId)'
+          arguments: '$PWD jmeterpocrandd.jmx $(hostJMeter) $(buildId)'
           workingDirectory: jmeter
           failOnStderr: false
