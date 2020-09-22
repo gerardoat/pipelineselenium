@@ -47,10 +47,12 @@ echo "===================== Descarga de AzCopy"
 wget -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy.tar.gz --strip-components=1
 echo "===================== Descarga de Index"
 ./azcopy copy "$fqdnContenedor/index.html?$sasContenedor" "./index.html"
+ls -l
 echo "===================== Carga de reporte a $fqdnContenedor/rep/$idReporte"
 ./azcopy copy "./report" "$fqdnContenedor/rep/$idReporte?$sasContenedor" --recursive=true
 liReporte="<li><a href='rep/$idReporte/report/index.html'>Build $idReporte</a></li>"
 echo "===================== Actualizando Index con $liReporte"
 echo "$liReporte" >> ./index.html
+cat ./index.html
 echo "===================== Carga de Index"
 ./azcopy copy "./index.html" "$fqdnContenedor/index.html?$sasContenedor" --recursive=true
