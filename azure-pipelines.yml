@@ -40,6 +40,42 @@ stages:
         overrideParameters: '-serverFarmResourceGroup $(resourceGroup) -hostingPlanName $(appServicePlan) -name AppSvs-$(buildIdHyphen)'
         deploymentMode: 'Incremental'
       displayName: 'Create App Service Plan'
+    - task: Bash@3
+      displayName: 'Esperar respuesta de App aprovisionada'
+      inputs:
+        targetType: filePath
+        filePath: 'infra/waitForApp.sh'
+        arguments: 'https://$(host)'
+        workingDirectory: infra
+        failOnStderr: false
+    - task: DotNetCoreCLI@2
+      displayName: 'Create the Publish'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        projects: 'src/PocRandD/PocRandD.csproj'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+      condition: succeededOrFailed()
+    - task: AzureRmWebAppDeployment@4
+      displayName: 'Deploy to Azure AppService'
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'SuscripcionMaru'
+        appType: 'webAppLinux'
+        WebAppName: 'pocselenium'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+        RuntimeStack: 'DOTNETCORE|3.1'
+    - task: Bash@3
+      displayName: 'Esperar respuesta de App publicada'
+      inputs:
+        targetType: filePath
+        filePath: 'infra/waitForApp.sh'
+        arguments: 'https://$(host)'
+        workingDirectory: infra
+        failOnStderr: false
   - job: SeleniumTests
     pool:
       vmImage: 'windows-2019'
