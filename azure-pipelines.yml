@@ -10,6 +10,7 @@ variables:
   resourceGroup: RG-$(resourcesId)
   appServicePlan: SvcPlan-$(resourcesId)
   UriAppPocRandD: $[format('https://appsvs-{0}.azurewebsites.net', replace(variables['Build.BuildNumber'],'.','-'))]
+  webAppName: $[format('appsvs-{0}', replace(variables['Build.BuildNumber'],'.','-'))]
 
 stages:
 - stage: Development
@@ -64,7 +65,7 @@ stages:
         ConnectionType: 'AzureRM'
         azureSubscription: 'SuscripcionMaru'
         appType: 'webAppLinux'
-        WebAppName: 'pocselenium'
+        WebAppName: '$(webAppName)'
         packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
         RuntimeStack: 'DOTNETCORE|3.1'
     - task: Bash@3
