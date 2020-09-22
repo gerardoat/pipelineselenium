@@ -94,6 +94,7 @@ stages:
   - job: JMeterTests
     pool:
       vmImage: ubuntu-latest
+    dependsOn: SeleniumTests
     steps:
       - task: Bash@3
         displayName: Execute JMeter tests
